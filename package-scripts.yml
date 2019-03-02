@@ -1,0 +1,33 @@
+scripts:
+  lint:
+    script: eslint src/**/*.js tests/**/*.js
+    description: Checks for any formatting errors
+  test:
+    default:
+      script: karma start karma.conf.js --single-run
+      description: Executes the Test Suite
+    tdd:
+      script: karma start karma.conf.js
+      description: Watches for changes and executes the Test Suite accordingly
+    sauce:
+      script: karma start karma.ci.conf.js
+      description: Executes the Test Suite on Sauce Labs
+  serve:
+    script: rm -rf dist && cross-env SERVE=true rollup -c --watch
+    description: Starts a server at http://localhost:8080
+  build:
+    default:
+      script: rm -rf dist && nps build.dev && nps build.prod
+      description: Builds both a minified and unminified artifacts
+    dev:
+      script: rollup -c
+      description: Builds an unminified artifact
+    prod:
+      script: cross-env NODE_ENV=production rollup -c
+      description: Builds a minified artifact
+  report-coverage:
+    script: coveralls < coverage/lcov.info
+    description: Reports code coverage information to Coveralls
+  semantic-release:
+    script: semantic-release
+    description: Publishes the artifact to NPM and GitHub
