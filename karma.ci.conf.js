@@ -1,7 +1,8 @@
 const rollup = require('./rollup.config.js');
 rollup.output.sourcemap = 'inline';
+delete rollup.external;
 
-module.exports = function(config) {
+module.exports = (config) => {
   const customLaunchers = {
     ChromeBeta: {
       base: 'SauceLabs',
@@ -42,7 +43,7 @@ module.exports = function(config) {
     }
   };
 
-  const karmaConfig = {
+  config.set({
     basePath: '',
 
     frameworks: [
@@ -60,7 +61,7 @@ module.exports = function(config) {
 
     rollupPreprocessor: rollup,
 
-    reporters: ['mocha', 'saucelabs'],
+    reporters: ['mocha', 'coverage'],
 
     mochaReporter: {
       output: 'minimal',
@@ -85,7 +86,5 @@ module.exports = function(config) {
     browserNoActivityTimeout: 120000,
 
     singleRun: true
-  };
-
-  config.set(karmaConfig);
-};
+  });
+}

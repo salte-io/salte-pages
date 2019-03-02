@@ -10,7 +10,7 @@ scripts:
       script: karma start karma.conf.js
       description: Watches for changes and executes the Test Suite accordingly
     sauce:
-      script: karma start karma.ci.sconf.js
+      script: karma start karma.ci.conf.js
       description: Executes the Test Suite on Sauce Labs
   serve:
     script: rm -rf dist && cross-env SERVE=true rollup -c --watch
