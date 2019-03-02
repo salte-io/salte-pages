@@ -4,13 +4,13 @@ scripts:
     description: Checks for any formatting errors
   test:
     default:
-      script: karma start --single-run
+      script: karma start karma.conf.js --single-run
       description: Executes the Test Suite
     tdd:
-      script: karma start
+      script: karma start karma.conf.js
       description: Watches for changes and executes the Test Suite accordingly
     sauce:
-      script: karma start karma.ci.conf.js
+      script: karma start karma.ci.sconf.js
       description: Executes the Test Suite on Sauce Labs
   serve:
     script: rm -rf dist && cross-env SERVE=true rollup -c --watch

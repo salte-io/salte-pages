@@ -54,7 +54,13 @@ class Pages extends LitElement {
         this.dispatchEvent(event);
 
         this.loading = true;
-        window.customElements.whenDefined(element.tagName.toLowerCase()).then(() => {
+
+        const promises = [];
+        if (element.tagName.match(/^\w+-/i)) {
+          promises.push(window.customElements.whenDefined(element.tagName.toLowerCase()));
+        }
+
+        this.loadComplete = Promise.all(promises).then(() => {
           const previouslySelected = this.querySelector('[selected]');
 
           const promises = [];
@@ -73,6 +79,14 @@ class Pages extends LitElement {
             }
 
             return Promise.all(promises);
+          }).then(() => {
+            const event = new CustomEvent('loaded', {
+              detail: page
+            });
+            this.dispatchEvent(event);
+
+            // Wait for the next render...
+            return new Promise((resolve) => setTimeout(() => window.requestAnimationFrame(resolve)));
           });
         }).finally(() => {
           this.loading = false;
