@@ -22,15 +22,6 @@ Simple Page Management
 
 Edge and Internet Explorer 11 require the web components polyfills.
 
-### Usage
-
-```html
-<salte-pages selected="dashboard" fallback="404">
-    <my-dashboard page="dashboard"></my-dashboard>
-    <div page="404">Native Elements are also supported!</div>
-</salte-pages>
-```
-
 ## Install
 
 ```sh
@@ -44,6 +35,19 @@ Then add a `<script>` to your index.html:
 ```
 
 Or `require('@salte-io/salte-pages')` from your code.
+
+### Usage
+
+Here's a simplified example of how it can be used!
+
+```html
+<salte-pages selected="dashboard" fallback="404">
+    <my-dashboard page="dashboard"></my-dashboard>
+    <div page="404">Native Elements are also supported!</div>
+</salte-pages>
+```
+
+Also a [Live Demo](https://salte-pages-demo.glitch.me/)!
 
 [npm-version-image]: https://img.shields.io/npm/v/@salte-io/salte-pages.svg?style=flat
 [npm-downloads-image]: https://img.shields.io/npm/dm/@salte-io/salte-pages.svg?style=flat
