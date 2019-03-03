@@ -1,6 +1,6 @@
 {
   "name": "@salte-io/salte-pages",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released.0",
   "main": "src/salte-pages.js",
   "description": "OAuth 2.0 for the masses!",
   "homepage": "https://github.com/salte-io/salte-pages",
@@ -17,7 +17,8 @@
     "url": "https://github.com/salte-io/salte-pages.git"
   },
   "scripts": {
-    "start": "nps"
+    "start": "nps",
+    "prepublishOnly": "npm start build"
   },
   "license": "MIT",
   "dependencies": {
@@ -25,12 +26,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "babel-eslint": "^10.0.1",
     "chai": "^4.0.0",
+    "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
     "deindent": "^0.1.0",
@@ -42,6 +46,7 @@
     "karma-coverage": "^1.0.0",
     "karma-mocha": "^1.0.0",
     "karma-mocha-reporter": "^2.2.5",
+    "karma-rollup-preprocessor": "^7.0.0",
     "karma-sauce-launcher": "^2.0.0",
     "karma-sinon": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
@@ -53,6 +58,8 @@
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-copy-assets-to": "^1.0.0",
+    "rollup-plugin-glob-import": "^0.3.1",
+    "rollup-plugin-istanbul": "^2.0.1",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-terser": "^4.0.4",

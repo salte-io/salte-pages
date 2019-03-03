@@ -10,6 +10,27 @@
 
 Simple Page Management
 
+## Supported Browsers
+
+`salte-pages` guarantees support for the following browsers:
+
+* Chrome (last 2 versions)
+* Safari (last 2 versions)
+* Opera (last 2 versions)
+* Edge (last 2 versions)
+* IE 11
+
+Edge and Internet Explorer 11 require the web components polyfills.
+
+### Usage
+
+```html
+<salte-pages selected="dashboard" fallback="404">
+    <my-dashboard page="dashboard"></my-dashboard>
+    <div page="404">Native Elements are also supported!</div>
+</salte-pages>
+```
+
 ## Install
 
 ```sh

@@ -6,14 +6,15 @@ branches:
   only:
     - master
     - /^greenkeeper/.*$/
+    - /^ci/.*$/
 script:
   - npm start lint
-  # - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then npm start test.sauce; fi
-  # - npm start test
-# after_success:
-#   - npm start report-coverage
-#   - npm start semantic-release
-# addons:
-#   sauce_connect: true
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then npm start test.sauce; fi
+  - npm start test
+after_success:
+  - npm start report-coverage
+  - npm start semantic-release
+addons:
+  sauce_connect: true
 notifications:
   email: change
