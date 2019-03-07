@@ -45,7 +45,7 @@ class SaltePages extends LitElement {
       this.loading = true;
 
       /** @type {Promise<void>} */
-      this.loadComplete = Promise.resolve().then(() => {
+      this.loadComplete = Promise.resolve(this.loadComplete).then(() => {
         const { page, element } = this._query(this.selected, this.fallback);
 
         if (!element) {
