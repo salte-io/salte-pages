@@ -61,10 +61,19 @@ class App extends LitElement {
   }
 
   load({ detail: page }) {
-    switch(page) {
-      case 'dashboard': return import('./salte-page-dashboard.js');
-      case '404': return import('./salte-page-404.js');
+    let promise = Promise.resolve();
+
+    if (page === 'dashboard') {
+      promise = import('./salte-page-dashboard.js');
+    } else if (page === '404') {
+      promise = import('./salte-page-404.js');
     }
+
+    promise.then(() => {
+      console.log('Page loaded successfully!');
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 }
 
