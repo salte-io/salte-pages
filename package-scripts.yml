@@ -13,18 +13,11 @@ scripts:
       script: karma start karma.ci.conf.js
       description: Executes the Test Suite on Sauce Labs
   serve:
-    script: rm -rf dist && cross-env SERVE=true rollup -c --watch
+    script: rm -rf dist && cross-env SERVE=true rollup -c rollup.serve.config.js --watch
     description: Starts a server at http://localhost:8080
   build:
-    default:
-      script: rm -rf dist && nps build.dev && nps build.prod
-      description: Builds both a minified and unminified artifacts
-    dev:
-      script: rollup -c
-      description: Builds an unminified artifact
-    prod:
-      script: cross-env NODE_ENV=production rollup -c
-      description: Builds a minified artifact
+    script: cross-env BUILD=true rollup -c
+    description: Builds both a minified and unminified es5 artifacts
   report-coverage:
     script: coveralls < coverage/lcov.info
     description: Reports code coverage information to Coveralls
