@@ -20,6 +20,7 @@ module.exports = (config) => {
     rollupPreprocessor: common({
       minified: false,
       es6: false,
+      tests: true,
       coverage: true
     }),
 
