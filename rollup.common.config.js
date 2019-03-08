@@ -1,5 +1,3 @@
-const defaults = require('defaults-deep');
-
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const glob = require('rollup-plugin-glob-import');
@@ -11,19 +9,16 @@ const istanbul = require('rollup-plugin-istanbul');
 const { name, contributors, version } = require('./package.json');
 
 module.exports = function(config) {
-  const { minified, es6, coverage } = config;
-  delete config.minified;
-  delete config.es6;
-  delete config.coverage;
+  const { minified, es6, coverage, tests } = config;
 
-  return defaults({
+  return {
     input: 'src/salte-pages.js',
-    external: coverage ? [] : ['lit-element'],
+    external: tests ? [] : ['lit-element'],
     output: {
       file: `dist/salte-pages${minified ? '.min' : ''}.${es6 ? 'mjs' : 'js'}`,
       format: es6 ? 'es' : 'umd',
       name: 'salte-pages',
-      sourcemap: coverage ? 'inline' : true,
+      sourcemap: tests ? 'inline' : true,
       exports: 'named',
       banner: deindent`
         /**
@@ -51,7 +46,7 @@ module.exports = function(config) {
       babel({
         exclude: /node_modules\/(?!(@webcomponents|lit-html|lit-element|chai-as-promised)\/).*/,
 
-        runtimeHelpers: !!coverage,
+        runtimeHelpers: !!tests,
 
         presets: [['@babel/preset-env', {
           targets: es6 ? {
@@ -67,7 +62,7 @@ module.exports = function(config) {
           }
         }]],
 
-        plugins: coverage ? [
+        plugins: tests ? [
           ['@babel/plugin-transform-runtime', {
             regenerator: true
           }]
@@ -96,5 +91,5 @@ module.exports = function(config) {
           console.error(`(!) ${warning.message}`);
       }
     }
-  }, config);
+  };
 }
