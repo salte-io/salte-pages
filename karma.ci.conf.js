@@ -44,11 +44,8 @@ module.exports = (config) => {
     rollupPreprocessor: common({
       minified: false,
       es6: false,
-
-      external: [],
-      output: {
-        sourcemap: 'inline'
-      }
+      tests: true,
+      coverage: true
     }),
 
     reporters: ['mocha', 'coverage'],
