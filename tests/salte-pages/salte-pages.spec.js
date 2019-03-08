@@ -49,7 +49,7 @@ describe('element(salte-pages)', () => {
             `;
           }
         }
-  
+
         customElements.define('salte-dashboard', Dashboard);
       });
 
@@ -119,6 +119,31 @@ describe('element(salte-pages)', () => {
       expect(selectedElements[0].getAttribute('page')).to.equal('404');
       expect(element.loading).to.equal(false);
     });
+
+    it(`should support switching pages multiple times in a row`, async () => {
+      const pages = element.querySelectorAll('[page]');
+      pages.forEach((page) => {
+        page.hide = page.show = function() {
+          return new Promise((resolve) => setTimeout(resolve));
+        };
+      });
+
+      element.selected = 'dashboard';
+      await element.updateComplete;
+
+      element.selected = '404';
+      await element.updateComplete;
+
+      element.selected = 'dashboard';
+      await element.updateComplete;
+
+      await element.loadComplete;
+
+      const selectedElements = element.querySelectorAll('[selected]');
+      expect(selectedElements.length).to.equal(1);
+      expect(selectedElements[0].getAttribute('page')).to.equal('dashboard');
+      expect(element.loading).to.equal(false);
+    });
   });
 
   describe('binding(attribute)', () => {
@@ -156,7 +181,7 @@ describe('element(salte-pages)', () => {
             resolve();
           }
         }
-  
+
         customElements.define('show-1', Show1);
       });
     });
@@ -181,7 +206,7 @@ describe('element(salte-pages)', () => {
             resolve();
           }
         }
-  
+
         customElements.define('show-2', Show2);
       });
     });
@@ -195,10 +220,10 @@ describe('element(salte-pages)', () => {
             resolve();
           }
         }
-  
+
         customElements.define('hide-1', Hide1);
       });
-      
+
       element = await fixture('salte-pages', `
         <hide-1 page="example"></hide-1>
         <div page="404">404</div>
@@ -208,7 +233,7 @@ describe('element(salte-pages)', () => {
 
       await element.updateComplete;
       await element.loadComplete;
-      
+
       element.selected = '404';
 
       return promise;

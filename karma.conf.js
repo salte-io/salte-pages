@@ -1,12 +1,4 @@
-const istanbul = require('rollup-plugin-istanbul');
-const rollup = require('./rollup.config.js');
-rollup.output.sourcemap = 'inline';
-delete rollup.external;
-rollup.plugins.unshift(
-  istanbul({
-    include: ['src/**/*.js']
-  })
-);
+const common = require('./rollup.common.config.js');
 
 module.exports = (config) => {
   config.set({
@@ -25,7 +17,11 @@ module.exports = (config) => {
       'tests/index.js': ['rollup', 'sourcemap']
     },
 
-    rollupPreprocessor: rollup,
+    rollupPreprocessor: common({
+      minified: false,
+      es6: false,
+      coverage: true
+    }),
 
     reporters: ['mocha', 'coverage'],
 

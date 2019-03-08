@@ -1,6 +1,4 @@
-const rollup = require('./rollup.config.js');
-rollup.output.sourcemap = 'inline';
-delete rollup.external;
+const common = require('./rollup.common.config.js');
 
 module.exports = (config) => {
   const lastTwoVersions = ['Chrome', 'Firefox', 'MicrosoftEdge', 'Safari'].reduce((output, browser) => {
@@ -43,7 +41,15 @@ module.exports = (config) => {
       'tests/index.js': ['rollup', 'sourcemap']
     },
 
-    rollupPreprocessor: rollup,
+    rollupPreprocessor: common({
+      minified: false,
+      es6: false,
+
+      external: [],
+      output: {
+        sourcemap: 'inline'
+      }
+    }),
 
     reporters: ['mocha', 'coverage'],
 
