@@ -55,7 +55,7 @@
     "nps": "^5.9.8",
     "page": "^1.11.4",
     "remove-lockfiles": "^2.0.0",
-    "rollup": "^1.20.3",
+    "rollup": "^2.0.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy-assets-to": "^1.0.0",
