@@ -5,6 +5,7 @@ const babel = require('rollup-plugin-babel');
 const deindent = require('deindent');
 const { terser } = require('rollup-plugin-terser');
 const istanbul = require('rollup-plugin-istanbul');
+const builtins = require('rollup-plugin-node-builtins');
 
 const { name, contributors, version } = require('./package.json');
 
@@ -39,7 +40,12 @@ module.exports = function(config) {
         include: ['src/**/*.js']
       }),
 
-      resolve(),
+      tests && builtins(),
+
+      resolve({
+        preferBuiltins: true
+      }),
+
       commonjs(),
       glob(),
 
