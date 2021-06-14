@@ -51,7 +51,7 @@
     "karma-sauce-launcher": "^4.1.4",
     "karma-sinon": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
-    "mocha": "^8.0.1",
+    "mocha": "^9.0.0",
     "nps": "^5.9.8",
     "page": "^1.11.4",
     "remove-lockfiles": "^2.0.0",
